@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Minesweeper.Data;
+using ElectronNET.API;
+using ElectronNET.API.Entities;
 
 namespace Minesweeper
 {
@@ -50,6 +52,19 @@ namespace Minesweeper
             {
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
+            });
+        }
+    
+        public async void ElectronBootstrap() {
+            var browserWindow = await Electron.WindowManager.CreateWindowAsync(new BrowserWindowOptions
+            {
+                Width = 1200,
+                Height = 800,
+                Show = false,
+                AutoHideMenuBar = true,
+                Title = "Minesweeper!",
+                Resizable = false,
+                Maximizable = false
             });
         }
     }
