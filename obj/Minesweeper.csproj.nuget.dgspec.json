@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Programmering\\C#\\Minesweeper\\Minesweeper\\Minesweeper.csproj": {}
+    "C:\\Programmering\\C#\\Minesweeper\\Minesweeper.csproj": {}
   },
   "projects": {
-    "C:\\Programmering\\C#\\Minesweeper\\Minesweeper\\Minesweeper.csproj": {
+    "C:\\Programmering\\C#\\Minesweeper\\Minesweeper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Programmering\\C#\\Minesweeper\\Minesweeper\\Minesweeper.csproj",
+        "projectUniqueName": "C:\\Programmering\\C#\\Minesweeper\\Minesweeper.csproj",
         "projectName": "Minesweeper",
-        "projectPath": "C:\\Programmering\\C#\\Minesweeper\\Minesweeper\\Minesweeper.csproj",
+        "projectPath": "C:\\Programmering\\C#\\Minesweeper\\Minesweeper.csproj",
         "packagesPath": "C:\\Users\\victo\\.nuget\\packages\\",
-        "outputPath": "C:\\Programmering\\C#\\Minesweeper\\Minesweeper\\obj\\",
+        "outputPath": "C:\\Programmering\\C#\\Minesweeper\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -40,6 +40,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "ElectronNET.API": {
+              "target": "Package",
+              "version": "[11.5.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -50,6 +56,20 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[5.0.1, 5.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[5.0.1, 5.0.1]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "version": "[5.0.1, 5.0.1]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -59,6 +79,11 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
         }
       }
     }
