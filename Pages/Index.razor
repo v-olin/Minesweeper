@@ -1,3 +1,33 @@
 @page "/"
+@inject NavigationManager NavigationManager
 
-<h1>Hello, world!</h1>
+<header class="header-container">
+    <div class="nav-container">
+        <div class="nav-header">
+            <h1 class="title">Minesweeper</h1>
+        </div>
+    </div>
+</header>
+<div class="fieldContainer">
+    <div class="field">
+        @for (var i = 0; i < vrows; i++)
+        {
+            <div class="row">
+                @for (var j = 0; j < hrows; j++)
+                {
+                    var buttonID = (i, j);
+                    <button class="square" @onclick="@(e => ButtonPressed(buttonID.i, buttonID.j))"></button>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    int hrows = 50;
+    int vrows = 30;
+
+    void ButtonPressed(int i, int j){
+        Console.WriteLine($"Button pressed at {i}, {j}");
+    }
+}

@@ -1,0 +1,58 @@
+html,
+body {
+    width: 1152px;
+    height: 940px;
+    margin: 0;
+}
+
+.header-container {
+    position: relative;
+    width: 100%;
+    height: 5rem;
+}
+
+.nav-container {
+    background-color: #415a88;
+    width: inherit;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.nav-header {
+    height: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    color: white;
+    font-family: "Roboto", sans-serif;
+    margin: 0px;
+    font-size: 50px;
+}
+
+.fieldContainer {
+    width: 100%;
+    height: 860px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    width: 100%;
+    height: auto;
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+.square {
+    background-color: lightgray;
+    width: 20px;
+    height: 20px;
+    margin: 1px;
+}
