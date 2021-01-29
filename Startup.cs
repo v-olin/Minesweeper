@@ -51,6 +51,11 @@ namespace Minesweeper
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+
+            if (HybridSupport.IsElectronActive)
+            {
+                ElectronBootstrap();
+            }
         }
     
         public async void ElectronBootstrap() {
