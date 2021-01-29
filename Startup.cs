@@ -69,6 +69,10 @@ namespace Minesweeper
                 Resizable = false,
                 Maximizable = false
             });
+
+            await browserWindow.WebContents.Session.ClearCacheAsync();
+
+            browserWindow.OnReadyToShow += () => browserWindow.Show();
         }
     }
 }
