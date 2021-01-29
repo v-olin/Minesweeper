@@ -1,11 +1,27 @@
+html,
+body {
+    /* position: relative; */
+    /* width: 1152px; */
+    height: 940px;
+    margin: 0;
+}
+
 .page {
-    position: relative;
     display: flex;
-    flex-direction: column;
+    flex-flow: column;
+    height: 940px;
+}
+
+.header {
+    width: 100%;
+    height: 5rem;
+    flex: 1;
 }
 
 .main {
-    flex: 1;
+    max-height: 860px;
+    flex-grow: 1;
+    margin: 0;
 }
 
 .sidebar {
@@ -21,26 +37,26 @@
     align-items: center;
 }
 
-    .top-row ::deep a, .top-row .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-    }
+.top-row ::deep a,
+.top-row .btn-link {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+}
 
-    .top-row a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+.top-row a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 @media (max-width: 640.98px) {
     .top-row:not(.auth) {
         display: none;
     }
-
     .top-row.auth {
         justify-content: space-between;
     }
-
-    .top-row a, .top-row .btn-link {
+    .top-row a,
+    .top-row .btn-link {
         margin-left: 0;
     }
 }
@@ -49,21 +65,18 @@
     .page {
         flex-direction: row;
     }
-
     .sidebar {
         width: 250px;
         height: 100vh;
         position: sticky;
         top: 0;
     }
-
     .top-row {
         position: sticky;
         top: 0;
         z-index: 1;
     }
-
-    .main > div {
+    .main>div {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
