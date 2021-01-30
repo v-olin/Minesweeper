@@ -62,7 +62,7 @@ namespace Minesweeper
             var browserWindow = await Electron.WindowManager.CreateWindowAsync(new BrowserWindowOptions
             {
                 Width = 1200,
-                Height = 800,
+                Height = 1000,
                 Show = false,
                 AutoHideMenuBar = true,
                 Title = "Minesweeper!",
