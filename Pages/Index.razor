@@ -1,5 +1,8 @@
 @page "/"
 
+@using Minesweeper.Data
+@inject GridService GridService
+
 <header class="header-container">
     <div class="nav-container">
         <div class="nav-header">
@@ -7,27 +10,36 @@
         </div>
     </div>
 </header>
-<div class="fieldContainer">
-    <div class="field">
-        @for (var i = 0; i < vrows; i++)
-        {
-            <div class="row">
-                @for (var j = 0; j < hrows; j++)
-                {
-                    var buttonID = (i, j);
-                    <button class="square" @onclick="@(e => ButtonPressed(buttonID.i, buttonID.j))"></button>
-                }
-            </div>
-        }
+@if (grid == null){
+    <p><em>Loading...</em></p>
+}
+else {
+    <div class="fieldContainer">
+        <div class="field">
+            @for (var i = 0; i < grid.GetLength(0); i++)
+            {
+                <div class="row">
+                    @for (var j = 0; j < grid.GetLength(1); j++)
+                    {
+                        var buttonID = (i, j);
+                        <button class="square"  @onclick="@(e => ButtonPressed(buttonID.i, buttonID.j))">
+                            @grid[i,j].NeighbouringBombs
+                        </button>
+                    }
+                </div>
+            }
+        </div>
     </div>
-</div>
+}
 
 @code {
-    int hrows = 50;
-    int vrows = 30;
-    @* var grid = new Cell[][]; *@
+    private Cell[,] grid;
 
     void ButtonPressed(int i, int j){
         Console.WriteLine($"Button pressed at {i}, {j}");
+    }
+
+    protected override async Task OnInitializedAsync(){
+        grid = await GridService.GetGrid();
     }
 }
