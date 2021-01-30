@@ -1,15 +1,15 @@
 html,
 body {
     /* position: relative; */
-    /* width: 1152px; */
-    height: 940px;
+    width: 1150px;
+    height: 780px;
     margin: 0;
 }
 
 .page {
     display: flex;
     flex-flow: column;
-    height: 940px;
+    height: 780px;
 }
 
 .header {
@@ -19,7 +19,7 @@ body {
 }
 
 .main {
-    max-height: 860px;
+    max-height: 780px;
     flex-grow: 1;
     margin: 0;
 }

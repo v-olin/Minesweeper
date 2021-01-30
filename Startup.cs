@@ -61,8 +61,8 @@ namespace Minesweeper
         public async void ElectronBootstrap() {
             var browserWindow = await Electron.WindowManager.CreateWindowAsync(new BrowserWindowOptions
             {
-                Width = 1200,
-                Height = 1000,
+                Width = 1150,
+                Height = 780 + 20, //content thickness + window bar
                 Show = false,
                 AutoHideMenuBar = true,
                 Title = "Minesweeper!",
