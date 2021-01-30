@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
+using Minesweeper.Data;
 
 namespace Minesweeper
 {
@@ -28,6 +29,7 @@ namespace Minesweeper
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddSingleton<Cell>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

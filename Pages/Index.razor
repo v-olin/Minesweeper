@@ -1,5 +1,4 @@
 @page "/"
-@inject NavigationManager NavigationManager
 
 <header class="header-container">
     <div class="nav-container">
@@ -26,6 +25,7 @@
 @code {
     int hrows = 50;
     int vrows = 30;
+    @* var grid = new Cell[][]; *@
 
     void ButtonPressed(int i, int j){
         Console.WriteLine($"Button pressed at {i}, {j}");
