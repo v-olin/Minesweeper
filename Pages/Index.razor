@@ -22,18 +22,19 @@ else {
                     @for (var j = 0; j < grid.GetLength(1); j++)
                     {
                         var cell = grid[i, j];
+                        var content = cell.SquareContent;
                         <button class="square"  @onclick="@(e => ButtonPressed(cell))">
                             @if (cell.Revealed == true){
                                 switch(cell.SquareContent){
-                                    case "":    <p class="info">@cell.SquareContent</p>
+                                    case "":    <p class="info">@content</p>
                                                 break;
-                                    case "B":   <p class="info">@cell.SquareContent</p>
+                                    case "B":   <p class="info bomb">@content</p>
                                                 break;
-                                    case "1":   <p class="info low">@cell.SquareContent</p>
+                                    case "1":   <p class="info low">@content</p>
                                                 break;
-                                    case "2":   <p class="info mid">@cell.SquareContent</p>
+                                    case "2":   <p class="info mid">@content</p>
                                                 break;
-                                    default:    <p class="info hi">@cell.SquareContent</p>
+                                    default:    <p class="info hi">@content</p>
                                                 break;
                                 }
                             } 
