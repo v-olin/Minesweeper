@@ -1,2 +1,4 @@
+# Generated files when building, no need to track them
 bin/
+# .NET debug & Node.js mostly, no need for tracking
 obj/
