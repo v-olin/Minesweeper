@@ -55,22 +55,18 @@ namespace Minesweeper.Data
 
             (int b, int f)[] offsets = Perimeter(i, j, grid.GetLength(0), grid.GetLength(1));
 
-            try
+            for (int x = offsets[0].b; x <= offsets[0].f; x++)
             {
-                for (int x = offsets[0].b; x <= offsets[0].f; x++)
+                for (int y = offsets[1].b; y <= offsets[1].f; y++)
                 {
-                    for (int y = offsets[1].b; y <= offsets[1].f; y++)
-                    {
-                        var xp = i + x; //xprime
-                        var yp = j + y; //yprime
+                    var xp = i + x; //xprime
+                    var yp = j + y; //yprime
 
-                        if (!(xp == i && yp == j))
-                            if (grid[xp, yp].Type == BoxType.Bomb)
-                                nearBombs++;
-                    }
+                    if (!(xp == i && yp == j))
+                        if (grid[xp, yp].Type == BoxType.Bomb)
+                            nearBombs++;
                 }
             }
-            catch (Exception){}
 
             if (nearBombs != 0)
             {
