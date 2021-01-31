@@ -25,14 +25,11 @@ namespace Minesweeper.Data
             {
                 for (int j = 0; j < grid.GetLength(1); j++)
                 {
-                    // 36/(50*30)=0,024 - estimated 36 bombs on full grid
-                    // each square has a 2.4% chance of being a bomb
+                    // each square has a 8% chance of becoming a bomb
                     var cell = new Cell();
-                    var bombPoss = rnd.Next(1000);
-                    if (bombPoss < 25)
-                    {
+                    var bombPoss = rnd.Next(100);
+                    if (bombPoss < 8)
                         cell.Type = BoxType.Bomb;
-                    }
                     grid[i, j] = cell;
                 }
             }
@@ -44,7 +41,8 @@ namespace Minesweeper.Data
             {
                 for (int j = 0; j < grid.GetLength(1); j++)
                 {
-                    PopulateNeighbour(ref grid, i, j);
+                    if (grid[i, j].Type != BoxType.Bomb)
+                        PopulateNeighbour(ref grid, i, j);
                 }
             }
         }

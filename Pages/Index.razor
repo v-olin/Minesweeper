@@ -21,9 +21,11 @@ else {
                 <div class="row">
                     @for (var j = 0; j < grid.GetLength(1); j++)
                     {
-                        var cellPos = (i, j);
-                        <button class="square"  @onclick="@(e => ButtonPressed(cellPos))">
-                            @grid[i,j].SquareContent
+                        var cell = grid[i, j];
+                        <button class="square"  @onclick="@(e => ButtonPressed(cell))">
+                            @if (cell.Revealed == true){
+                                <p>@grid[i,j].SquareContent</p>
+                            }
                         </button>
                     }
                 </div>
@@ -35,14 +37,14 @@ else {
 @code {
     private Cell[,] grid;
 
-    void ButtonPressed((int i, int j) cellPos){
-        var cellType = grid[cellPos.i, cellPos.j].Type;
-        if (cellType == BoxType.Bomb)
-            Console.WriteLine($"Cell [{cellPos.i},{cellPos.j}] is a bomb!");
-        else if (cellType == BoxType.Neighbour)
-            Console.WriteLine($"Cell [{cellPos.i},{cellPos.j}] has {grid[cellPos.i, cellPos.j].NeighbouringBombs} bombs next to it!");
+    void ButtonPressed(Cell cell){
+        cell.Revealed = true;
+        if (cell.Type == BoxType.Bomb)
+            Console.WriteLine($"Cell is a bomb!");
+        else if (cell.Type == BoxType.Neighbour)
+            Console.WriteLine($"Cell has {cell.NeighbouringBombs} bombs next to it!");
         else
-            Console.WriteLine($"Cell [{cellPos.i},{cellPos.j}] is empty!");
+            Console.WriteLine($"Cell is empty!");
     }
 
     protected override async Task OnInitializedAsync(){
