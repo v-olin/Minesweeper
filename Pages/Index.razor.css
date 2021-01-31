@@ -1,7 +1,7 @@
 html,
 body {
-    width: 1150px;
-    height: 780;
+    width: 1350px;
+    height: 942px;
     margin: 0;
     padding: 0;
 }
@@ -37,7 +37,7 @@ body {
 
 .fieldContainer {
     width: 100%;
-    height: 700px;
+    height: 840px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,20 +52,31 @@ body {
 }
 
 .square {
-    background-color: lightgray;
-    width: 20px;
-    height: 20px;
+    background-color: #d3d3d3;
+    width: 24px;
+    height: 24px;
     margin: 1px;
 }
 
-.info {
+.info-container {
     margin: 0px;
-    margin-left: -8px;
-    margin-top: -4px;
+    margin-left: -6px;
+    margin-top: -1px;
     padding: 0;
-    height: inherit;
+    height: 20px;
+    width: 20px;
+}
+
+.info {
     width: inherit;
-    font-size: 16px;
+    height: inherit;
+    margin: 0px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.revealed {
+    background-color: #a1a1a1;
 }
 
 .low {

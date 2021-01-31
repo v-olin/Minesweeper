@@ -10,10 +10,12 @@
         </div>
     </div>
 </header>
-@if (grid == null){
+@if (grid == null)
+{
     <p><em>Loading...</em></p>
 }
-else {
+else
+{
     <div class="fieldContainer">
         <div class="field">
             @for (var i = 0; i < grid.GetLength(0); i++)
@@ -23,21 +25,30 @@ else {
                     {
                         var cell = grid[i, j];
                         var content = cell.SquareContent;
-                        <button class="square"  @onclick="@(e => ButtonPressed(cell))">
-                            @if (cell.Revealed == true){
-                                switch(cell.SquareContent){
-                                    case "":    <p class="info">@content</p>
-                                                break;
-                                    case "B":   <p class="info bomb">@content</p>
-                                                break;
-                                    case "1":   <p class="info low">@content</p>
-                                                break;
-                                    case "2":   <p class="info mid">@content</p>
-                                                break;
-                                    default:    <p class="info hi">@content</p>
-                                                break;
+                        <button class="square" @onclick="@(e => ButtonPressed(cell))">
+                            <div class="info-container">
+                                @if (cell.Revealed == true)
+                                {
+                                    switch (cell.SquareContent)
+                                    {
+                                        case "": 
+                                            <p class="info revealed">@content</p>
+                                            break;
+                                        case "B": 
+                                            <p class="info revealed bomb">@content</p>
+                                            break;
+                                        case "1": 
+                                            <p class="info revealed low">@content</p>
+                                            break;
+                                        case "2": 
+                                            <p class="info revealed mid">@content</p>
+                                            break;
+                                        default: 
+                                            <p class="info revealed hi">@content</p>
+                                            break;
+                                    }
                                 }
-                            } 
+                            </div>
                         </button>
                     }
                 </div>
@@ -49,7 +60,8 @@ else {
 @code {
     private Cell[,] grid;
 
-    void ButtonPressed(Cell cell){
+    void ButtonPressed(Cell cell)
+    {
         cell.Revealed = true;
         if (cell.Type == BoxType.Bomb)
             Console.WriteLine($"Cell is a bomb!");
@@ -59,7 +71,8 @@ else {
             Console.WriteLine($"Cell is empty!");
     }
 
-    protected override async Task OnInitializedAsync(){
+    protected override async Task OnInitializedAsync()
+    {
         grid = await GridService.GetGrid();
     }
 }

@@ -9,7 +9,7 @@
   "environment": "Production",
   "build": {
     "appId": "com.Minesweeper.app",
-    "productName": "Minesweeper",
+    "productName": "Blazorsweeper",
     "copyright": "Copyright © 2020",
     "buildVersion": "1.0.0",
     "compression": "maximum",

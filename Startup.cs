@@ -61,16 +61,17 @@ namespace Minesweeper
         }
     
         public async void ElectronBootstrap() {
+            
             var browserWindow = await Electron.WindowManager.CreateWindowAsync(new BrowserWindowOptions
             {
-                Width = 1150,
-                Height = 780 + 20, //content thickness + window bar
+                Width = 1350,
+                Height = 922 + 20, //content thickness + window bar
                 Show = false,
                 AutoHideMenuBar = true,
-                Title = "Minesweeper!",
                 Resizable = false,
-                Maximizable = false
-            });
+                Maximizable = false,
+                Icon = Directory.GetCurrentDirectory() + "\\flag.ico" //at runtime current dir is \obj\Host\bin
+            };);
 
             await browserWindow.WebContents.Session.ClearCacheAsync();
 
