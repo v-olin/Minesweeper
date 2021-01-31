@@ -33,10 +33,6 @@ namespace Minesweeper.Data
                     {
                         cell.Type = BoxType.Bomb;
                     }
-                    if (i == 3 && j == 3)
-                    {
-                        cell.Type = BoxType.Bomb;
-                    }
                     grid[i, j] = cell;
                 }
             }
