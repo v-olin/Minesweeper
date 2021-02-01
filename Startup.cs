@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -71,7 +72,7 @@ namespace Minesweeper
                 Resizable = false,
                 Maximizable = false,
                 Icon = Directory.GetCurrentDirectory() + "\\flag.ico" //at runtime current dir is \obj\Host\bin
-            };);
+            });
 
             await browserWindow.WebContents.Session.ClearCacheAsync();
 

@@ -2,6 +2,7 @@
 
 @using Minesweeper.Data
 @inject GridService GridService
+@inject IJSRuntime JS;
 
 <header class="header-container">
     <div class="nav-container">
@@ -63,12 +64,18 @@ else
     void ButtonPressed(Cell cell)
     {
         cell.Revealed = true;
-        if (cell.Type == BoxType.Bomb)
+        if (cell.Type == BoxType.Bomb){
+            AlertPLayer("Haha du förlorade!");
             Console.WriteLine($"Cell is a bomb!");
+        }
         else if (cell.Type == BoxType.Neighbour)
             Console.WriteLine($"Cell has {cell.NeighbouringBombs} bombs next to it!");
         else
             Console.WriteLine($"Cell is empty!");
+    }
+
+    async void AlertPLayer(string msg){
+        await JS.InvokeAsync<object>("ShowAlert", msg);
     }
 
     protected override async Task OnInitializedAsync()
