@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
 using Minesweeper.Data;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
 
 namespace Minesweeper
 {
@@ -59,6 +61,9 @@ namespace Minesweeper
             {
                 ElectronBootstrap();
             }
+
+            var summary = BenchmarkRunner.Run<SingleVsParallell>();
+            System.Console.WriteLine(summary.Reports);
         }
     
         public async void ElectronBootstrap() {
@@ -78,5 +83,68 @@ namespace Minesweeper
 
             browserWindow.OnReadyToShow += () => browserWindow.Show();
         }
+    }
+
+    public class SingleVsParallell{
+
+        private Cell[,] grid;
+        private List<(int i, int j)> emptyNeighbours;
+        private int i = 25;
+        private int j = 15;
+
+        public SingleVsParallell(){
+            emptyNeighbours = new List<(int i, int j)>();
+            InitGrid();
+        }
+
+        private async void InitGrid(){
+            grid = await new GridService().GetGrid();
+        }
+
+        [Benchmark] // Lägg till benchmarks för AsParallell och för samuels metod
+        public void AsSingle()
+        {
+            emptyNeighbours.Add((i, j));
+
+            (int b, int f)[] offsets = Perimeter(i, j, grid.GetLength(0), grid.GetLength(1));
+
+            for (int x = offsets[0].b; x <= offsets[0].f; x++)
+            {
+                for (int y = offsets[1].b; y <= offsets[1].f; y++)
+                {
+                    if (x + y % 2 != 0 && !(x == 0 && y == 0))
+                    {
+                        int ip = i + x, jp = j + y;
+                        if (grid[ip, jp].Type == BoxType.Empty)
+                        {
+                            if (!emptyNeighbours.Contains((ip, jp)))
+                            {
+                                emptyNeighbours.Add((ip, jp));
+                                AsSingle();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private (int b, int f)[] Perimeter(int i, int j, int maxh, int maxw) // i = height offset, j = width offset
+        {
+            (int h, int w)[] offset = { (0, 0), (0, 0) }; //[0] = height offset, [1] = width offset
+
+            if (i == 0) offset[0] = (0, 1); //0 steps up, 1 step up
+            else if (i == maxh - 1) offset[0] = (-1, 0);
+            else offset[0] = (-1, 1);
+
+            if (j == 0) offset[1] = (0, 1);
+            else if (j == maxw - 1) offset[1] = (-1, 0);
+            else offset[1] = (-1, 1);
+
+            return offset;
+        }
+
+        
+
     }
 }
