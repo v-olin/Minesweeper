@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Minesweeper.Data
@@ -86,6 +88,32 @@ namespace Minesweeper.Data
             else offset[1] = (-1, 1);
 
             return offset;
+        }
+
+        public void FindNearbyCells(ref Cell[,] grid, ref List<(int i, int j)> emptyNeighbours, int i, int j)
+        {
+            emptyNeighbours.Add((i, j));
+
+            (int b, int f)[] offsets = Perimeter(i, j, grid.GetLength(0), grid.GetLength(1));
+
+            for (int x = offsets[0].b; x <= offsets[0].f; x++)
+            {
+                for (int y = offsets[1].b; y <= offsets[1].f; y++)
+                {
+                    if (x + y % 2 != 0 && !(x == 0 && y == 0))
+                    {
+                        int ip = i + x, jp = j + y;
+                        if (grid[ip, jp].Type == BoxType.Empty)
+                        {
+                            if (!emptyNeighbours.Contains((ip, jp)))
+                            {
+                                emptyNeighbours.Add((ip, jp));
+                                FindNearbyCells(ref grid, ref emptyNeighbours, ip, jp);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

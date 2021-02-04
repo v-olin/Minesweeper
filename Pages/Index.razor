@@ -24,9 +24,10 @@ else
                 <div class="row">
                     @for (var j = 0; j < grid.GetLength(1); j++)
                     {
+                        var index = (i, j);
                         var cell = grid[i, j];
                         var content = cell.SquareContent;
-                        <button class="square" @onclick="@(e => ButtonPressed(cell))">
+                        <button class="square" @onclick="@(e => ButtonPressed(cell, index.i, index.j))">
                             <div class="info-container">
                                 @if (cell.Revealed == true)
                                 {
@@ -60,8 +61,9 @@ else
 
 @code {
     private Cell[,] grid;
+    private List<(int i, int j)> emptyNeighbours = new();
 
-    void ButtonPressed(Cell cell)
+    void ButtonPressed(Cell cell, int i, int j)
     {
         cell.Revealed = true;
         if (cell.Type == BoxType.Bomb){
@@ -70,8 +72,18 @@ else
         }
         else if (cell.Type == BoxType.Neighbour)
             Console.WriteLine($"Cell has {cell.NeighbouringBombs} bombs next to it!");
-        else
+        else{
+            GetEmptyNeighbours(i, j);
             Console.WriteLine($"Cell is empty!");
+        }
+    }
+
+    void GetEmptyNeighbours(int i, int j){
+        GridService.FindNearbyCells(ref grid, ref emptyNeighbours, i, j);
+
+        foreach (var pair in emptyNeighbours){
+            grid[pair.i, pair.j].Revealed = true;
+        }
     }
 
     async void AlertPLayer(string msg){
