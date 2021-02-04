@@ -10,7 +10,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
+  <!-- <ItemGroup>
     <ProjectReference Include = "..\BenchmarkDotNet\BenchmarkDotNet\src\BenchmarkDotNet\BenchmarkDotNet.csproj" />
-  </ItemGroup>
+  </ItemGroup> -->
 </Project>

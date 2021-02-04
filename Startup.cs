@@ -12,8 +12,8 @@ using Microsoft.Extensions.Hosting;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
 using Minesweeper.Data;
-using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
+// using BenchmarkDotNet.Attributes;
+// using BenchmarkDotNet.Running;
 
 namespace Minesweeper
 {
@@ -62,8 +62,8 @@ namespace Minesweeper
                 ElectronBootstrap();
             }
 
-            var summary = BenchmarkRunner.Run<SingleVsParallell>();
-            System.Console.WriteLine(summary.Reports);
+            // var summary = BenchmarkRunner.Run<SingleVsParallell>();
+            // System.Console.WriteLine(summary.Reports);
         }
     
         public async void ElectronBootstrap() {
@@ -101,7 +101,7 @@ namespace Minesweeper
             grid = await new GridService().GetGrid();
         }
 
-        [Benchmark] // Lägg till benchmarks för AsParallell och för samuels metod
+        // [Benchmark] // Lägg till benchmarks för AsParallell och för samuels metod
         public void AsSingle()
         {
             emptyNeighbours.Add((i, j));

@@ -92,6 +92,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        // grid should only be initialized on first button press and first press should be an empty cell
         grid = await GridService.GetGrid();
     }
 }

@@ -100,7 +100,7 @@ namespace Minesweeper.Data
             {
                 for (int y = offsets[1].b; y <= offsets[1].f; y++)
                 {
-                    if (x + y % 2 != 0 && !(x == 0 && y == 0))
+                    if (!(x == 0 && y == 0))
                     {
                         int ip = i + x, jp = j + y;
                         if (grid[ip, jp].Type == BoxType.Empty)
