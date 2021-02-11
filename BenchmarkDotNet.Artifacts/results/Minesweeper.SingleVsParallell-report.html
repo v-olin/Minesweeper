@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Minesweeper.SingleVsParallell-20210208-224833</title>
+<title>Minesweeper.SingleVsParallell-20210209-000324</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -13,7 +13,7 @@
 </head>
 <body>
 <pre><code>
-BenchmarkDotNet=v0.12.1.20210208-develop, OS=Windows 10.0.19041.746 (2004/May2020Update/20H1)
+BenchmarkDotNet=v0.12.1.20210209-develop, OS=Windows 10.0.19041.746 (2004/May2020Update/20H1)
 Intel Core i5-9600K CPU 3.70GHz (Coffee Lake), 1 CPU, 6 logical and 6 physical cores
 .NET SDK=5.0.101
   [Host]     : .NET 5.0.1 (5.0.120.57516), X64 RyuJIT DEBUG
@@ -24,8 +24,8 @@ Intel Core i5-9600K CPU 3.70GHz (Coffee Lake), 1 CPU, 6 logical and 6 physical c
 <table>
 <thead><tr><th>Method</th><th>Mean</th><th>Error</th><th>StdDev</th>
 </tr>
-</thead><tbody><tr><td>AsSingle</td><td>92.53 ns</td><td>0.294 ns</td><td>0.245 ns</td>
-</tr><tr><td>AsSamuel</td><td>45.10 ns</td><td>0.027 ns</td><td>0.024 ns</td>
+</thead><tbody><tr><td>AsSingle</td><td>95.00 ns</td><td>0.264 ns</td><td>0.234 ns</td>
+</tr><tr><td>AsQueue</td><td>48.95 ns</td><td>0.063 ns</td><td>0.059 ns</td>
 </tr></tbody></table>
 </body>
 </html>

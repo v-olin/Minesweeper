@@ -89,12 +89,13 @@ namespace Minesweeper
     public class SingleVsParallell
     {
 
-        private Cell[,] grid = new Cell[10000, 5000];
+        private Cell[,] grid = new Cell[1000, 500];
         private List<(int i, int j)> emptyNeighbours;
         private int i;
         private int j;
         private Queue<(int i, int j)> toVisit;
         private HashSet<(int i, int j)> visited;
+        List<(int i, int j)> neighbours = new();
 
         public SingleVsParallell()
         {
@@ -113,7 +114,7 @@ namespace Minesweeper
         }
 
         [Benchmark]
-        public void AsSingle()
+        public void AsNestedFor()
         {
             emptyNeighbours.Add((i, j));
 
@@ -131,7 +132,7 @@ namespace Minesweeper
                             if (!emptyNeighbours.Contains((ip, jp)))
                             {
                                 emptyNeighbours.Add((ip, jp));
-                                AsSingle();
+                                AsNestedFor();
                             }
                         }
                     }
@@ -146,46 +147,41 @@ namespace Minesweeper
             while (toVisit.Count != 0)
             {
                 var temp = toVisit.Dequeue();
-                visited.Add((i, j));
                 if (!visited.Contains(temp))
                 {
-                    List<(int i, int j)> neighbours = Neighbours(i, j, grid.GetLength(0), grid.GetLength(1));
-                    foreach (var neighbour in neighbours)
+                    Neighbours(neighbours, i, j, grid.GetLength(0), grid.GetLength(1));
+                    for (int k = 0; k < neighbours.Count; k++)
                     {
-                        if (grid[neighbour.i, neighbour.j].Type == BoxType.Empty &&
-                            !(neighbour.i == i && neighbour.j == j) &&
-                            !visited.Contains(neighbour))
+                        if (grid[neighbours[k].i, neighbours[k].j].Type == BoxType.Empty &&
+                            !(neighbours[k].i == i && neighbours[k].j == j) &&
+                            !visited.Contains(neighbours[k]))
                         {
-                            toVisit.Enqueue(neighbour);
+                            toVisit.Enqueue(neighbours[k]);
                         }
                     }
                 }
+                visited.Add(temp);
             }
         }
 
-        private List<(int i, int j)> Neighbours(int i, int j, int maxh, int maxw)
+        private void Neighbours(List<(int i, int j)> neighbours, int i, int j, int maxh, int maxw)
         {
-            int[] iOffsets, jOffsets;
+            int[] iOffsets = new int[] { -1, 0, 1 }, jOffsets = new int[] { -1, 0, 1 };
 
             if (i == 0) iOffsets = new int[] { 0, 1 }; //Enumerable.Range(0,2).ToList();
             else if (i == maxh - 1) iOffsets = new int[] { -1, 0 };
-            else iOffsets = new int[] { -1, 0, 1 };
 
             if (j == 0) jOffsets = new int[] { 0, 1 };
             else if (j == maxw - 1) jOffsets = new int[] { -1, 0 };
-            else jOffsets = new int[] { -1, 0, 1 };
 
-            List<(int i, int j)> ns = new();
-
+            neighbours.Clear();
             foreach (var ip in iOffsets)
             {
                 foreach (var jp in jOffsets)
                 {
-                    ns.Add((i + ip, j + jp));
+                    neighbours.Add((i + ip, j + jp));
                 }
             }
-
-            return ns;
         }
 
         private (int b, int f)[] Perimeter(int i, int j, int maxh, int maxw) // i = height offset, j = width offset
